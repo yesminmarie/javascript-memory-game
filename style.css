@@ -4,17 +4,51 @@
     box-sizing: border-box;
 }
 
+body{
+    font-family: 'Balsamiq Sans', cursive;
+}
+
 .painel {
-    margin: 30px 500px 30px 450px;
+    margin: 30px 30vw;
+}
+
+.painel-elements {
     display: flex;
     justify-content: space-between;
-    font-family: 'Roboto', sans-serif;
-    font-size: 20px;
+    align-items: center;
+    font-size: 25px;
+}
+
+.moves, .time {
+    color: teal;
 }
 
 .cont-moves-text {
     margin: 0 20px;
 }
+
+.restart-button {
+    font-size: 15px;
+    border-radius: 8px;
+    border: none;
+    padding: 10px 20px;
+    background-color: teal;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .1s;
+    color: white;
+    align-self: flex-end;
+}
+
+.restart-button:focus { 
+    outline: none; 
+    
+}
+
+.restart-button:hover {
+    background-color: rgb(29, 119, 119);
+}
+
 
 .container {
     margin: 10px 240px auto;
@@ -81,4 +115,40 @@
     width: 100px;
     height: 100px;
     border-radius: 8px;
+}
+
+/* responsividade */
+/* para largura de 0 a 900px*/
+@media (max-width: 900px) {
+    .painel {
+        margin: 30px 10vw;
+    }
+
+    .painel-elements {
+        font-size: 15px;
+    }
+
+    .restart-button {
+        font-size: 10px;
+        padding: 5px 10px;
+    }
+
+    .board {
+        grid-template: repeat(4, 50px) / repeat(5, 50px);
+    }
+
+    .container {
+        margin: 10px 20px auto;
+    }
+
+    .card-container {
+        width: 50px;
+        height: 50px;
+    }
+
+    .flip-card-back img{
+        width: 50px;
+        height: 50px;
+    }
+
 }

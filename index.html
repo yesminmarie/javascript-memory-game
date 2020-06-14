@@ -6,20 +6,27 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
-
+        <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
         <title>Memory Game</title>
     </head>
 
     <body>
         <div class="painel">
-            <div class="cont-moves-text">Moves:
-                <span class="moves"></span>
-            </div>
+            <div class="painel-elements">
+                <div class="cont-moves-text">Moves:
+                    <span class="moves"></span>
+                </div>
 
-            <div class="cont-time-text">Time:
-                <span class="time"></span>
-            </div>
+                <div class="cont-time-text">Time:
+                    <span class="time"></span>
+                </div>
 
+                <div>
+                    <button onclick="startGame()" class="restart-button">
+                        Restart
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="container">
             <div class="board"></div>
