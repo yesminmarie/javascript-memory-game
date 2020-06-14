@@ -26,10 +26,8 @@ for (let i = 0; i < imagesListDuplicated.length; i++) {
     card.setAttribute('class', 'card')
     card.setAttribute('data-image', imagesListDuplicated[i])
 
-    //adiciona evento de clique ao card e cria a classe 'is-flipped' para o cartão virar
-    card.addEventListener('click', function () {
-        verifyFlippedCard(card)
-    })
+    //adiciona evento de clique ao card e chama a função verifyFlippedCard
+    card.addEventListener('click', verifyFlippedCard)
 
     //serão criadas outras duas divs, uma para o 'front' e outra para o 'back'
     const flipCardFront = document.createElement('div')
@@ -56,26 +54,60 @@ for (let i = 0; i < imagesListDuplicated.length; i++) {
     board.appendChild(cardContainer)
 }
 
-let firstCardFlipped
-let secondCardFlipped
-let hasFlippedCard = false
+let firstCardFlipped = null //armazena o primeiro cartão virado
+let secondCardFlipped = null //armazena o segundo cartão virado
+let hasFlippedFirstCard = false //será true se o primeiro cartão foi clicado
+let hasFlippedSecondCard = false //será true se o segundo cartão foi clicado
+let contMoves = 0
+const moves = document.querySelector('.moves')
 
-function verifyFlippedCard(card) {
-    if (!hasFlippedCard) {
-        card.classList.toggle('is-flipped')
-        firstCardFlipped = card
-        hasFlippedCard = true
-        console.log("firstImage:")
-        console.log(firstCardFlipped)
+function verifyFlippedCard() {
+    //se o primeiro cartão foi clicado
+    if (!hasFlippedFirstCard) {
+        //adiciona a classe 'is-flipped' para fazer o cartão virar
+        this.classList.add('is-flipped')
+        //armazena o cartão clicado em firstCardFlipped
+        firstCardFlipped = this
+        //o primeiro cartão foi virado (true)
+        hasFlippedFirstCard = true
+        contMoves += 1
+        //moves.disabled = true
+        moves.innerHTML = contMoves
     }
+    //se o segundo cartão foi clicado
+    else if (!hasFlippedSecondCard) {
+        //se o jogador clicar no mesmo cartão clicado anteriormente, retorna sem fazer nada
+        if (this === firstCardFlipped) return
+        //senão, adiciona a classe is-flipped' para fazer o cartão virar
+        this.classList.add('is-flipped')
+        //armazena o cartão clicado em secondCardFlipped
+        secondCardFlipped = this
+        //o segundo cartão foi virado (true)
+        hasFlippedSecondCard = true
+        //deixa os dois cartões abertos durante 2 segundos e chama a função que verifica se os dois são iguais
+        setTimeout(() => { verifyIfMatched(firstCardFlipped, secondCardFlipped) }, 1500)
+
+    }
+
+}
+
+function verifyIfMatched(card1, card2) {
+    //se o primeiro cartão virado é igual ao segundo
+    if (card1.dataset.image === card2.dataset.image) {
+        //remove o evento de click nos dois cartões
+        card1.removeEventListener('click', verifyFlippedCard)
+        card2.removeEventListener('click', verifyFlippedCard)
+        //retorna o valor false para as duas variáveis para que o jogador possa continuar o jogo 
+        hasFlippedFirstCard = false
+        hasFlippedSecondCard = false
+    }
+    //senão
     else {
-        card.classList.toggle('is-flipped')
-        secondCardFlipped = card
-        hasFlippedCard = false
-        console.log("secondImage:")
-        console.log(secondCardFlipped)
-    }
-    if (firstCardFlipped.dataset.image === secondCardFlipped.dataset.image) {
-        card.classList.add('is-flipped')
+        //remove a classe 'is-flipped' dos dois cartões para que eles sejam desvirados
+        card1.classList.remove('is-flipped')
+        card2.classList.remove('is-flipped')
+        //retorna o valor false para as duas variáveis para que o jogador possa continuar o jogo 
+        hasFlippedFirstCard = false
+        hasFlippedSecondCard = false
     }
 }

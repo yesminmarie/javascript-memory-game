@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Memory Game</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 
-<body>
-    <div class="container">
-        <div class="board">
+        <title>Memory Game</title>
+    </head>
+
+    <body>
+        <div class="painel">
+            <div class="cont-moves-text">Moves:
+                <span class="moves"></span>
+            </div>
+
+            <div class="cont-time-text">Time:
+                <span class="time"></span>
+            </div>
 
         </div>
-    </div>
-    <script src="script.js" defer></script>
-</body>
+        <div class="container">
+            <div class="board"></div>
+        </div>
+        <script src="script.js" defer="defer"></script>
+    </body>
 
 </html>
